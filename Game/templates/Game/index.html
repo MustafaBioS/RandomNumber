@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <link rel="stylesheet" href="{% static 'Game/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+    <h1 class="heading">Guess The Random Number</h1>
+
+    <form action="{% url 'guess' %}" method="post" class="inputcontainer">
+        {% csrf_token %}
+        <input type="number" name="guess" min="1" max="10"  class="inp" required>
+    </form>
+    
+    {% if result %}
+    <h1 class="{% if result == 'Correct Guess! Play again.' %}green{% else %}red{% endif %}">{{ result }}</h1>
+    <meta http-equiv="refresh" content="3">
+    {% endif %}
+    </div>
+</body>
+</html>
